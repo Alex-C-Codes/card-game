@@ -1,6 +1,7 @@
 import Phaser from 'phaser';
 import Scene1 from './Scenes/Scene1';
-import Scene2 from './Scenes/Scene2';
+// import Scene2 from './Scenes/Scene2';
+import MainScene from './Scenes/MainScene';
 
 // // Example: Create a simple Phaser game
 // const config = {
@@ -24,8 +25,19 @@ window.onload = function () {
     type: Phaser.AUTO,
     width: 800,
     height: 800,
-    backgroundColor: 0xc5e3ec,
-    scene: [Scene1, Scene2],
+    // resolution: window.devicePixelRatio,
+    // resolution: 2,
+    // render: {
+    //   pixelArt: true, // Enables pixel-perfect rendering
+    //   antialias: false, // Disables anti-aliasing
+    // },
+    // render: 2,
+    // scale: {
+    //   mode: Phaser.Scale.FIT,
+    //   autoCenter: Phaser.Scale.CENTER_BOTH,
+    // },
+    backgroundColor: 0x3e424b,
+    scene: [Scene1, MainScene],
 };
 
   const game = new Phaser.Game(config); // Instantiate the game with the configuration
