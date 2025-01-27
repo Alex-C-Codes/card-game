@@ -37,7 +37,8 @@ window.onload = function () {
     //   autoCenter: Phaser.Scale.CENTER_BOTH,
     // },
     backgroundColor: 0x3e424b,
-    scene: [Scene1, MainScene],
+    // scene: [Scene1, MainScene],
+    scene: [MainScene],
 };
 
   const game = new Phaser.Game(config); // Instantiate the game with the configuration

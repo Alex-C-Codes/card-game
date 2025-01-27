@@ -9,10 +9,4 @@ export const fighterPlayer = new Player (
     "Healing Potion",
 );
 
-export const roguePlayer = new Player (
-    "Frodo",
-    "Rogue",
-    7,
-    ["Attack", "Sneak", "Run"],
-    "Healing Potion",
-);
+expo

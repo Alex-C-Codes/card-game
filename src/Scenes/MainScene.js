@@ -16,7 +16,7 @@ const y = 20;
 
 export default class MainScene extends Phaser.Scene {
     constructor() {
-        super('playGame');
+        super('startGame');
     }
 
     create() {
@@ -42,28 +42,23 @@ export default class MainScene extends Phaser.Scene {
             .text(x, y * 8, "Player Attack", { fill: "#0f5" })
             .setInteractive()
             .on("pointerdown", () => {
-                this.damageMonster(1); // Reduce monster health by 2
+                this.damageMonster(1); // Reduce monster health by 1
             });
-
-        // this.updateMonsterHealthText(monsterHealth);
     }
-
-    // updateMonsterHealthText(monsterHealth) {
-    //     // console.log("Slime health is now: " + monsterHealth);
-    //     this.monsterHealthText.setText(`HP: ${monsterHealth}`);
-    // }
 
     spawnMonster(monsterObj, x, y) {
         // Create monster text UI
-        this.add.text(x, y, monsterObj.monsterType);
+        this.monsterTypeText = this.add.text(x, y, monsterObj.monsterType);
         this.monsterHealthText = this.add.text(x, y + 20, `HP: ${monsterObj.health}`);
-        this.add.text(x, y + 40, `Attack Damage: ${monsterObj.monsterAttackDamage}`);
+        this.monsterDamageText = this.add.text(x, y + 40, `Attack Damage: ${monsterObj.monsterAttackDamage}`);
+
+        // Optionally: Add a sprite for the monster
+        this.monsterSprite = this.add.rectangle(x + 50, y + 80, 50, 50, 0x00ff00); // Placeholder red square
+        // Use actual sprites if you have them
+        // this.monsterSprite = this.add.sprite(x + 50, y + 80, 'monsterSpriteKey');
 
         // Store the monster's current health for tracking
         this.monsterHealth = monsterObj.health;
-
-        // Optionally: Display a monster sprite if you have an asset
-        // this.add.sprite(x + 50, y + 80, 'slimeMonsterSprite'); // Replace with your sprite's key
     }
 
     damageMonster(damage) {
@@ -75,12 +70,19 @@ export default class MainScene extends Phaser.Scene {
 
         // Check if the monster is defeated
         if (this.monsterHealth <= 0) {
-            this.onMonsterDefeated();
+            this.destroyMonster();
+            this.spawnMonster(slimeMonster, x + 300, y * 2);
         }
     }
 
-    onMonsterDefeated() {
-        // Handle monster defeat logic
+    destroyMonster() {
+        // Remove all monster-related game objects
+        this.monsterTypeText.destroy();
+        this.monsterHealthText.destroy();
+        this.monsterDamageText.destroy();
+        this.monsterSprite.destroy(); // Destroy the sprite (if used)
+
+        // Optional: Add feedback for the monster's defeat
         this.add.text(200, 400, "The monster has been defeated!", { fill: "#f00" });
     }
 }
